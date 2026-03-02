@@ -1,0 +1,32 @@
+group = 'com.hyunbindev'
+version = '0.0.1-SNAPSHOT'
+description = 'api'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+    implementation project(':common')
+    implementation project(':auth')
+    implementation project(':user')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll '-Xjsr305=strict'
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

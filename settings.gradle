@@ -1,0 +1,13 @@
+pluginManagement {
+    repositories {
+        maven { url = 'https://repo.spring.io/snapshot' }
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'galaxyarchive'
+
+
+include 'api'
+include 'common'
+include 'auth'
+include 'user'
