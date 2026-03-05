@@ -1,4 +1,4 @@
-package com.hyunbindev.auth
+package com.hyunbindev.auth.configuration
 
 import com.hyunbindev.auth.oauth2.service.OAuth2SuccessService
 import com.hyunbindev.auth.oauth2.service.OAuth2UserService

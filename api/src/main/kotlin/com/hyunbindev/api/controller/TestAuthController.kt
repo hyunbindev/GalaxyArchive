@@ -7,11 +7,8 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
 @RestController
-@RequestMapping("/test")
-class TestController {
+@RequestMapping("/test/auth")
+class TestAuthController {
     @GetMapping
-    fun test(): String = "test controller"
-
-    @GetMapping("/public/authentication")
-    fun authenticattionEndPoint(@LoginUserId loginUserId: UUID) = "isAuthenticated"
+    fun test(@LoginUserId userUuid: UUID): String = "test authenticated controller injected by resolver user id is ${userUuid.toString()}"
 }
