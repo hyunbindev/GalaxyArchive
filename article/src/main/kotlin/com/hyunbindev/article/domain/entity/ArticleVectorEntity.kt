@@ -1,4 +1,4 @@
-package com.hyunbindev.article.entity
+package com.hyunbindev.article.domain.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

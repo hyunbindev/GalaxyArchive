@@ -1,6 +1,7 @@
-package com.hyunbindev.article.entity
+package com.hyunbindev.article.domain.entity
 
 import com.hyunbindev.article.application.ArticleStatus
+import com.hyunbindev.article.data.dto.ArticleDto
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -40,4 +41,14 @@ class ArticleEntity(
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     var status: ArticleStatus = ArticleStatus.PENDING
+
+    companion object{
+        fun from(authorId: UUID, req: ArticleDto.CreateRequest):ArticleEntity{
+            return ArticleEntity(
+                title = req.title,
+                authorId = authorId,
+                text = req.text
+            )
+        }
+    }
 }
