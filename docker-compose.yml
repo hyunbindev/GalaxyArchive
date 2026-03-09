@@ -26,12 +26,19 @@ services:
       KAFKA_PROCESS_ROLES: 'broker,controller'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:9093'
 
-      KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka:9092'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT'
+      KAFKA_LISTENERS: 'INTERNAL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'INTERNAL://galaxy-kafka:29092,EXTERNAL://localhost:9092'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
 
+      KAFKA_JMX_PORT: 9997
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=galaxy-kafka -Dcom.sun.management.jmxremote.rmi.port=9997"
+
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_OFFLINE_IMAGE_MODE: 'true'
     networks:
       - galaxy-network
@@ -44,11 +51,20 @@ services:
       - "9090:8080"
     environment:
       KAFKA_CLUSTERS_0_NAME: galaxy-cluster
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: Kafka:9092
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: galaxy-kafka:29092
       KAFKA_CLUSTERS_0_METRICS_PORT: 9997
       DYNAMIC_CONFIG_ENABLED: true
     networks:
       - galaxy-network
+
+  #AI Embedding Engine
+  ollama:
+    image: ollama/ollama:latest
+    container_name: galaxy-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./volumes/ollama_data:/root/.ollama
 networks:
   galaxy-network:
     driver: bridge

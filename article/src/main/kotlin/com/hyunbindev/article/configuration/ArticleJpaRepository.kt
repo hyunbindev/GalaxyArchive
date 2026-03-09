@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @Configuration
-@EntityScan(basePackages = ["com.hyunbindev.article.entity"])
-@EnableJpaRepositories(basePackages = ["com.hyunbindev.article.domain"])
+@EntityScan(basePackages = ["com.hyunbindev.article.domain.entity"])
+@EnableJpaRepositories(basePackages = ["com.hyunbindev.article.domain.repository"])
 class ArticleJpaRepository {
 }

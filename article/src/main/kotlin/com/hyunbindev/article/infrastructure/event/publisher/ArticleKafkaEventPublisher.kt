@@ -1,15 +1,15 @@
-package com.hyunbindev.article.infrastructure
+package com.hyunbindev.article.infrastructure.event.publisher
 
-import com.hyunbindev.article.domain.event.ArticleCreateEvent
-import com.hyunbindev.article.domain.event.ArticleEventPublisher
+import com.hyunbindev.article.domain.event.create.ArticleCreateEvent
+import com.hyunbindev.article.domain.event.create.ArticleCreateEventPublisher
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Component
 
 @Component
-class ArticleKafkaEventPublisher(
+internal class ArticleKafkaEventPublisher(
     private val kafkaTemplate: KafkaTemplate<String, Any>
-): ArticleEventPublisher {
+): ArticleCreateEventPublisher {
     private val logger = LoggerFactory.getLogger(ArticleKafkaEventPublisher::class.java)
     override fun publishCreateEvent(event: ArticleCreateEvent) {
         try{

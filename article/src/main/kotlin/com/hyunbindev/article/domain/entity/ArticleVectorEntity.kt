@@ -14,17 +14,18 @@ import java.time.LocalDateTime
 
 @Entity
 class ArticleVectorEntity(
-    @Id
-    val articleId: Long? = null,
-
-    @Column(columnDefinition = "vector(15000)")
-    @JdbcTypeCode(SqlTypes.ARRAY)
-    val embedding: DoubleArray,
-) {
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
-    lateinit var article: ArticleEntity
+    val article: ArticleEntity,
+
+    @Column(columnDefinition = "vector(1024)")
+    @JdbcTypeCode(SqlTypes.ARRAY)
+    val vector: FloatArray,
+) {
+    @Id
+    @Column(name = "article_id")
+    val articleId: Long? = null
 
     @LastModifiedDate
     @Column(nullable = false)
