@@ -21,6 +21,7 @@ interface ArticleVectorRepository : JpaRepository<ArticleVectorEntity, Long> {
                """, nativeQuery = true)
     fun findAllEdgesOrderByWeightDESC(): List<ArticleEdgeProjection>
 }
+
 interface ArticleEdgeProjection{
     val u:Long
     val v:Long

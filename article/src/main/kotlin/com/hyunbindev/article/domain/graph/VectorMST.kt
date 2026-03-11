@@ -7,5 +7,7 @@ class VectorMST(val edges:List<VectorEdge>) {
 
         return sortedEdges
     }
-    private fun unionFind()
+    private fun unionFind(){
+
+    }
 }
