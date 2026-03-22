@@ -11,6 +11,6 @@ class OAuth2SuccessService : SimpleUrlAuthenticationSuccessHandler(){
 
     override fun onAuthenticationSuccess(
         request: HttpServletRequest ,response: HttpServletResponse ,authentication: Authentication) {
-        redirectStrategy.sendRedirect(request, response, "/test")
+        redirectStrategy.sendRedirect(request, response, "http://localhost:3000")
     }
 }

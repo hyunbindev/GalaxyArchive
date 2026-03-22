@@ -1,5 +1,6 @@
-package com.hyunbindev.user.application.update
+package com.hyunbindev.user.application.service.command.update
 
+import com.hyunbindev.user.application.port.UserUpdateUseCase
 import com.hyunbindev.user.data.UserInfoDto
 import com.hyunbindev.user.entity.UserEntity
 import com.hyunbindev.user.exception.UserException
@@ -12,9 +13,9 @@ import java.time.LocalDateTime
 @Service
 class UserUpdateService(
     private val userRepository: UserRepository,
-) {
+): UserUpdateUseCase {
     @Transactional
-    fun update(userInfoDto: UserInfoDto): UserInfoDto {
+    override fun update(userInfoDto: UserInfoDto): UserInfoDto {
         val provider = requireNotNull(userInfoDto.oAuth2Provider) { throw UserException(UserExceptionCode.USER_INTERNAL_ERROR) }
         val providerId = requireNotNull(userInfoDto.providerId) { throw UserException(UserExceptionCode.USER_INTERNAL_ERROR) }
 

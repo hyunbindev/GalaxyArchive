@@ -1,6 +1,6 @@
 package com.hyunbindev.article.application.service.vector.query
 
-import com.hyunbindev.article.application.port.ArticleGraphUserCase
+import com.hyunbindev.article.application.port.ArticleGraphUseCase
 import com.hyunbindev.article.domain.graph.VectorEdge
 import com.hyunbindev.article.domain.graph.VectorGraph
 import com.hyunbindev.article.domain.repository.ArticleVectorRepository
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class ArticleVectorGraphService(
     private val articleVectorRepository: ArticleVectorRepository
-): ArticleGraphUserCase {
+): ArticleGraphUseCase {
     override fun getAllArticleGraph():List<VectorEdge>{
         val edges = articleVectorRepository.findAllEdgesOrderByWeightASC()
             .map { VectorEdge(it.u,it.v,it.w) }
