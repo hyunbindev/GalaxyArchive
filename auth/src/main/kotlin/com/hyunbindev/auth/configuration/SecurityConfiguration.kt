@@ -27,6 +27,9 @@ class SecurityConfiguration(
                     "/login/**",
                     "/oauth2/**",
                     "/api/v1/**",
+                    "/v3/api-docs/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
                     "/test/**").permitAll()
                     .anyRequest().authenticated()
             }

@@ -23,3 +23,8 @@ spring:
       embedding:
         options:
           model: bge-m3
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
