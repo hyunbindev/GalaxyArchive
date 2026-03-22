@@ -1,4 +1,4 @@
-package com.hyunbindev.api.controller
+package com.hyunbindev.api
 
 import com.hyunbindev.common.auth.LoginUserId
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,5 +13,5 @@ class TestController {
     fun test(): String = "test controller"
 
     @GetMapping("/public/authentication")
-    fun authenticattionEndPoint(@LoginUserId loginUserId: UUID) = "isAuthenticated"
+    fun authenticationEndPoint(@LoginUserId loginUserId: UUID) = "isAuthenticated"
 }

@@ -1,4 +1,4 @@
-package com.hyunbindev.api.controller.user
+package com.hyunbindev.api.user.controller
 
 import com.hyunbindev.common.auth.LoginUserId
 import com.hyunbindev.user.application.port.UserQueryUseCase
@@ -15,7 +15,7 @@ class UserController(
     private val userQueryUseCase: UserQueryUseCase
 ) {
     @GetMapping("/me")
-    fun getUserSelf(@LoginUserId userId: UUID): ResponseEntity<UserInfoDto>{
+    fun getUserSelf(@LoginUserId userId: UUID): ResponseEntity<UserInfoDto> {
         return ResponseEntity.ok(userQueryUseCase.getUser(userId))
     }
 }

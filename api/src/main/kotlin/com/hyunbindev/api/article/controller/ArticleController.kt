@@ -1,4 +1,4 @@
-package com.hyunbindev.api.controller.article
+package com.hyunbindev.api.article.controller
 
 import com.hyunbindev.article.application.port.ArticleGraphUseCase
 import com.hyunbindev.article.application.port.CreateArticleUseCase
