@@ -8,12 +8,14 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.MapsId
 import jakarta.persistence.OneToOne
+import jakarta.persistence.Table
 import org.hibernate.annotations.JdbcTypeCode
 import org.hibernate.type.SqlTypes
 import org.springframework.data.annotation.LastModifiedDate
 import java.time.LocalDateTime
 
 @Entity
+@Table(name = "article_vector")
 class ArticleVectorEntity(
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)

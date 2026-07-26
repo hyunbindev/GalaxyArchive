@@ -17,7 +17,7 @@ interface ArticleKeywordRepository: JpaRepository<ArticleKeyWordEntity, Long> {
             article_id AS articleId,
             keyword AS keyword,
             similarity AS similarity
-        FROM article_key_word_entity
+        FROM article_keyword
         WHERE article_id IN (:articleIds)
         ORDER BY similarity DESC
         LIMIT :limit

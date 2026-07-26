@@ -21,6 +21,7 @@ import java.util.UUID
 
 @Entity
 @Table(
+    name = "app_user",
     uniqueConstraints = [
         UniqueConstraint(name = "uk_provider_id", columnNames = ["o_auth2provider", "provider_id"])
     ]

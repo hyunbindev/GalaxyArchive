@@ -1,8 +1,8 @@
 package com.hyunbindev.article.comment.application.service.command
 
 import com.hyunbindev.article.article.port.usecase.inbound.ArticleQueryUseCase
-import com.hyunbindev.article.comment.adapter.outbound.CommentRepository
-import com.hyunbindev.article.comment.domain.CommentEntity
+import com.hyunbindev.article.comment.adapter.outbound.ArticleCommentRepository
+import com.hyunbindev.article.comment.domain.ArticleCommentEntity
 import com.hyunbindev.article.comment.port.inbound.ArticleCommentCreateUseCase
 import com.hyunbindev.article.global.exception.ArticleException
 import com.hyunbindev.article.global.exception.constant.ArticleCommentExceptionCode
@@ -13,7 +13,7 @@ import java.util.UUID
 
 @Service
 internal class ArticleCommentCreateService(
-    private val commentRepository: CommentRepository,
+    private val commentRepository: ArticleCommentRepository,
     private val articleQueryUseCase: ArticleQueryUseCase,
 ): ArticleCommentCreateUseCase {
     @Transactional
@@ -21,7 +21,7 @@ internal class ArticleCommentCreateService(
         if(!articleQueryUseCase.isArticleExist(articleId))
             throw ArticleException(ArticleExceptionCode.ARTICLE_NOT_FOUND)
 
-        val comment:CommentEntity = CommentEntity(authorId=authorId, articleId=articleId, text=text)
+        val comment:ArticleCommentEntity = ArticleCommentEntity(authorId=authorId, articleId=articleId, text=text)
 
         commentRepository.save(comment)
     }
@@ -31,14 +31,14 @@ internal class ArticleCommentCreateService(
         if(!articleQueryUseCase.isArticleExist(articleId))
             throw ArticleException(ArticleExceptionCode.ARTICLE_NOT_FOUND)
 
-        val parentComment:CommentEntity = commentRepository.findArticleCommentById(parentCommentId)
+        val parentComment:ArticleCommentEntity = commentRepository.findArticleCommentById(parentCommentId)
             ?:throw ArticleException(ArticleCommentExceptionCode.COMMENT_NOT_FOUND)
 
         if(parentComment.articleId != articleId){
             throw ArticleException(ArticleCommentExceptionCode.COMMENT_BAD_REQUEST)
         }
 
-        val comment:CommentEntity = CommentEntity(authorId=authorId, articleId=articleId, parent = parentComment , text=text)
+        val comment:ArticleCommentEntity = ArticleCommentEntity(authorId=authorId, articleId=articleId, parent = parentComment , text=text)
 
         commentRepository.save(comment)
     }

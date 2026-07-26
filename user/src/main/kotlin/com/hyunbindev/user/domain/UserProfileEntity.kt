@@ -9,10 +9,12 @@ import jakarta.persistence.MapsId
 import jakarta.persistence.OneToOne
 import jakarta.persistence.PostLoad
 import jakarta.persistence.PostPersist
+import jakarta.persistence.Table
 import org.springframework.data.domain.Persistable
 import java.util.UUID
 
 @Entity
+@Table(name = "user_profile")
 class UserProfileEntity(
     @Id
     @Column(name="user_id")

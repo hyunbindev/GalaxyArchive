@@ -23,7 +23,7 @@ interface ArticleRepository : JpaRepository<ArticleEntity, Long> {
             LEFT(COALESCE(article.raw_text,''), :textLength) AS text,
             article.created_at AS createdAt,
             article.author_id AS authorId
-        FROM article_entity article 
+        FROM article article 
         WHERE article.id IN :ids 
         AND article.is_deleted = false
     """, nativeQuery = true)
@@ -37,7 +37,7 @@ interface ArticleRepository : JpaRepository<ArticleEntity, Long> {
          LEFT(COALESCE(a.raw_text,''), :textLength) AS text,
          a.created_at AS createdAt,
          a.author_id AS authorId
-        FROM article_entity a
+        FROM article a
         WHERE a.author_id = :authorId
         AND a.is_deleted = false
         AND (:cursorId IS NULL OR a.id < :cursorId)
