@@ -26,6 +26,7 @@ interface ArticleRepository : JpaRepository<ArticleEntity, Long> {
         FROM article article 
         WHERE article.id IN :ids 
         AND article.is_deleted = false
+        ORDER BY article.created_at DESC
     """, nativeQuery = true)
     fun findArticleByIdWithDeleted(ids: List<Long>, textLength: Int): List<ArticleSummary>
 
