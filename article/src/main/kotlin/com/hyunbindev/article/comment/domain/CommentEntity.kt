@@ -8,11 +8,13 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
 import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
-class CommentEntity(
+@Table(name = "article_comment")
+class ArticleCommentEntity(
     @Column(columnDefinition="TEXT", nullable = false)
     val text:String,
 
@@ -24,7 +26,7 @@ class CommentEntity(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", nullable = true)
-    var parent: CommentEntity?=null
+    var parent: ArticleCommentEntity?=null
     ) {
 
     @Id

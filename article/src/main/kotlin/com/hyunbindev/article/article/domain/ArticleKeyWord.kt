@@ -6,8 +6,10 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
 
 @Entity
+@Table(name = "article_keyword")
 class ArticleKeyWordEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     val article: ArticleEntity,
