@@ -26,7 +26,10 @@ spring:
       embedding:
         options:
           model: bge-m3
-
+  data:
+    redis:
+      host: galaxy-redis
+      port: 6379
 cloud:
   aws:
     credentials:
