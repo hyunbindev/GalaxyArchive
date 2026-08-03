@@ -29,13 +29,13 @@ class UserController(
         return ResponseEntity.ok().build()
     }
 
-    @GetMapping("/{userId}/articles")
+    @GetMapping("/{userId}/articles/summary")
     fun getArticleByUser(
         @PathVariable userId: UUID,
-        @RequestParam(required = false) size: Int?,
-        @RequestParam(required = false) lastArticleId: Long?
+        @RequestParam(defaultValue = "10") size:Int,
+        @RequestParam(required = false) lastArticleId:Long?,
+        @RequestParam(defaultValue = "100") summaryTextLength:Int,
     ): ArticleSummaryPageDto {
-        return articleQueryUseCase.getArticleSummaryPageByCursorAndAuthor(userId, lastArticleId, size ?: 10)
+        return articleQueryUseCase.getArticleSummaryPageByCursorAndAuthor(userId, lastArticleId, size,summaryTextLength)
     }
-
 }
