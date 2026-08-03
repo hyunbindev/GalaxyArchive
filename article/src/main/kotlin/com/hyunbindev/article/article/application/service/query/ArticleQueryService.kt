@@ -36,14 +36,15 @@ internal class ArticleQueryService(
     override fun getArticleSummaryPageByCursorAndAuthor(
         authorId: UUID,
         cursorArticleId: Long?,
-        size: Int
+        size: Int,
+        textLength:Int
     ): ArticleSummaryPageDto {
         val articleSummary: List<ArticleSummary> = articleRepository
             .findByArticleSummaryByUserIdByCursor(
                 authorId = authorId,
                 cursorId = cursorArticleId,
-                size = size + 1,
-                textLength = 100
+                size = size ?: (10 + 1),
+                textLength = textLength ?: 100
             )
 
         val commentsCountMap: Map<Long, Int> = commentQueryUseCase

@@ -1,5 +1,7 @@
 package com.hyunbindev.auth.configuration
 
+
+
 import com.hyunbindev.auth.oauth2.repository.RedirectOAuth2AuthorizationRequestResolver
 import com.hyunbindev.auth.oauth2.service.OAuth2SuccessService
 import com.hyunbindev.auth.oauth2.service.OAuth2UserService
@@ -21,7 +23,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 class SecurityConfiguration(
     private val oAuth2UserService: OAuth2UserService,
     private val oAuth2SuccessService: OAuth2SuccessService,
-    private val clientRegistrationRepository: ClientRegistrationRepository
+    private val clientRegistrationRepository: ClientRegistrationRepository,
 ) {
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
@@ -37,13 +39,13 @@ class SecurityConfiguration(
         return source
     }
 
+
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf { it.disable() }
             .httpBasic { it.disable() }
             .formLogin { it.disable() }
             .cors { it.configurationSource(corsConfigurationSource()) }
-
             // Accept requests
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers(

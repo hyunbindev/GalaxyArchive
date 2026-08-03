@@ -8,6 +8,6 @@ import java.util.UUID
 interface ArticleQueryUseCase {
     fun getArticle(id:Long): ArticleDto.Response
     fun isArticleExist(id:Long):Boolean
-    fun getArticleSummaryPageByCursorAndAuthor(authorId: UUID, cursorArticleId:Long?, size:Int): ArticleSummaryPageDto
+    fun getArticleSummaryPageByCursorAndAuthor(authorId: UUID, cursorArticleId:Long?, size:Int, textLength:Int): ArticleSummaryPageDto
     fun getArticleSummaryByIds(articleIds: List<Long>): List<ArticleSummaryDto>
 }
