@@ -33,16 +33,24 @@ interface ArticleRepository : JpaRepository<ArticleEntity, Long> {
     @Query(
         value = """
         SELECT
-         a.id AS id,
-         a.title AS title,
-         LEFT(COALESCE(a.raw_text,''), :textLength) AS text,
-         a.created_at AS createdAt,
-         a.author_id AS authorId
-        FROM article a
-        WHERE a.author_id = :authorId
-        AND a.is_deleted = false
-        AND (:cursorId IS NULL OR a.id < :cursorId)
-        ORDER BY a.created_at DESC
+         article.id AS id,
+         article.title AS title,
+         LEFT(COALESCE(article.raw_text,''), :textLength) AS text,
+         article.created_at AS createdAt,
+         article.author_id AS authorId,
+         image.raw_key AS thumbnailUrl
+        FROM article
+        LEFT JOIN LATERAL (
+            SELECT raw_key
+            FROM article_image image
+            WHERE image.article_id = article.id
+            ORDER BY image.id
+            LIMIT 1
+        ) image ON true
+        WHERE article.author_id = :authorId
+        AND article.is_deleted = false
+        AND (:cursorId IS NULL OR article.id < :cursorId)
+        ORDER BY article.created_at DESC
         LIMIT :size
     """, nativeQuery = true
     )
@@ -67,4 +75,5 @@ interface ArticleSummary {
     val text: String
     val createdAt: LocalDateTime
     val authorId: UUID
+    val thumbnailUrl:String?
 }
