@@ -17,7 +17,8 @@ data class ArticleSummaryDto(
     val description:String,
     val createdAt: LocalDateTime,
     val commentsCount:Int=0,
-    val keywords:List<String>
+    val keywords:List<String>,
+    val thumbnailUrl:String?,
 ){
     companion object{
         fun from(projection: ArticleSummary, commentCount:Int?, keywords:List<String>):ArticleSummaryDto{
@@ -27,7 +28,8 @@ data class ArticleSummaryDto(
                 description = projection.text,
                 createdAt = projection.createdAt,
                 commentsCount = commentCount?:0,
-                keywords = keywords
+                keywords = keywords,
+                thumbnailUrl = projection.thumbnailUrl,
             )
         }
     }
