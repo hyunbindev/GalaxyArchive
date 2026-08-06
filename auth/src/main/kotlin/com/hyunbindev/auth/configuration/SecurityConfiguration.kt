@@ -51,11 +51,12 @@ class SecurityConfiguration(
                 auth.requestMatchers(
                     "/login/**",
                     "/oauth2/**",
-                    "/api/v1/**",
+                    "/api/**",
                     "/v3/api-docs/**",
                     "/swagger-ui/**",
                     "/swagger-ui.html",
-                    "/test/**"
+                    "/test/**",
+                    "/internal/**"
                 ).permitAll()
                     .anyRequest().authenticated()
             }

@@ -1,4 +1,4 @@
-package com.hyunbindev.auth.application.port
+package com.hyunbindev.auth.port.inbound
 
 import java.util.UUID
 

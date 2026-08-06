@@ -1,6 +1,6 @@
 package com.hyunbindev.api.support.resolver
 
-import com.hyunbindev.auth.application.port.UserProviderUseCase
+import com.hyunbindev.auth.port.inbound.UserProviderUseCase
 import com.hyunbindev.auth.exception.AuthException
 import com.hyunbindev.auth.exception.constant.AuthExceptionCode
 import com.hyunbindev.common.auth.LoginUserId
