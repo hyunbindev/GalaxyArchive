@@ -1,6 +1,6 @@
 package com.hyunbindev.auth.application.service
 
-import com.hyunbindev.auth.application.port.UserProviderUseCase
+import com.hyunbindev.auth.port.inbound.UserProviderUseCase
 import com.hyunbindev.auth.exception.AuthException
 import com.hyunbindev.auth.exception.constant.AuthExceptionCode
 import com.hyunbindev.auth.oauth2.model.OAuth2UserPrincipal
