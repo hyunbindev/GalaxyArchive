@@ -1,6 +1,7 @@
 package com.hyunbindev.api.support.resolver
 
 import com.hyunbindev.common.image.RequestByteStream
+import jakarta.servlet.ServletInputStream
 import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.LoggerFactory
 import org.springframework.core.MethodParameter
@@ -28,10 +29,12 @@ class ByteStreamRequestArgumentResolver: HandlerMethodArgumentResolver {
         mavContainer: ModelAndViewContainer?,
         webRequest: NativeWebRequest,
         binderFactory: WebDataBinderFactory?
-    ): Any {
+    ): ServletInputStream {
+
         log.debug("Resolving request to {}", parameter.parameterType)
         val request: HttpServletRequest = webRequest.getNativeRequest(HttpServletRequest::class.java)
             ?:throw IllegalArgumentException("ServletRequest missing")
+
         return request.inputStream
     }
 }

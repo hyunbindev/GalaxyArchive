@@ -19,7 +19,7 @@ import java.util.UUID
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "article")
-class ArticleEntity(
+open class ArticleEntity(
     @Column(nullable = false)
     val title:String,
 

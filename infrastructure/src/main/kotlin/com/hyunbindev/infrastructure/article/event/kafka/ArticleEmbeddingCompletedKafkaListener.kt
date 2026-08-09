@@ -9,7 +9,7 @@ import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
-class ArticleEmbeddingCompletedKafkaListener(
+internal class ArticleEmbeddingCompletedKafkaListener(
     private val articleEmbeddingCompleteEventHandler: ArticleEmbeddingCompleteEventHandler,
     private val objectMapper: ObjectMapper,
 )

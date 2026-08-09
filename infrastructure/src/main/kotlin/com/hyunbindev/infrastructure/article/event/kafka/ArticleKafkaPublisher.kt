@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 import java.util.concurrent.TimeUnit
 
 @Component
-class ArticleKafkaPublisher(
+internal class ArticleKafkaPublisher(
     private val kafkaTemplate: KafkaTemplate<String, ArticleCreateEvent>
 ): ArticleEventPublishPort {
     private val logger = LoggerFactory.getLogger(ArticleKafkaPublisher::class.java)

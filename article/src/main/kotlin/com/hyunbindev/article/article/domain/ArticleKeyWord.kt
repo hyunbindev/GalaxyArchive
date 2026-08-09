@@ -10,7 +10,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "article_keyword")
-class ArticleKeyWordEntity(
+open class ArticleKeyWordEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     val article: ArticleEntity,
 

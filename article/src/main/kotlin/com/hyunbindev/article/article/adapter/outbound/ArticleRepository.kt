@@ -16,15 +16,18 @@ interface ArticleRepository : JpaRepository<ArticleEntity, Long> {
     @Query("SELECT a FROM ArticleEntity a WHERE a.id=:id AND a.isDeleted = true")
     fun findArticleByIdWithDeleted(id: Long): ArticleEntity?
 
-    @Query("""
+    @Query(
+        """
         SELECT
             article.id AS id,
             article.title AS title,
-            LEFT(COALESCE(article.raw_text,''), :textLength) AS text,
+            LEFT(article.raw_text, :textLength) AS text,
             article.created_at AS createdAt,
-            article.author_id AS authorId
-        FROM article article 
-        WHERE article.id IN :ids 
+            article.author_id AS authorId,
+            stat.view_count AS viewCount
+        FROM article
+        LEFT JOIN article_stat stat ON stat.article_id = article.id
+        WHERE article.id IN :ids
         AND article.is_deleted = false
         ORDER BY article.created_at DESC
     """, nativeQuery = true)
@@ -35,10 +38,11 @@ interface ArticleRepository : JpaRepository<ArticleEntity, Long> {
         SELECT
          article.id AS id,
          article.title AS title,
-         LEFT(COALESCE(article.raw_text,''), :textLength) AS text,
+         LEFT(article.raw_text, :textLength) AS text,
          article.created_at AS createdAt,
          article.author_id AS authorId,
-         image.raw_key AS thumbnailUrl
+         image.raw_key AS thumbnailUrl,
+         stat.view_count AS viewCount
         FROM article
         LEFT JOIN LATERAL (
             SELECT raw_key
@@ -47,6 +51,7 @@ interface ArticleRepository : JpaRepository<ArticleEntity, Long> {
             ORDER BY image.id
             LIMIT 1
         ) image ON true
+        LEFT JOIN article_stat stat ON stat.article_id = article.id
         WHERE article.author_id = :authorId
         AND article.is_deleted = false
         AND (:cursorId IS NULL OR article.id < :cursorId)
@@ -76,4 +81,5 @@ interface ArticleSummary {
     val createdAt: LocalDateTime
     val authorId: UUID
     val thumbnailUrl:String?
+    val viewCount:Long
 }
