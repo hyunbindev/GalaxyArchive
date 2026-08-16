@@ -47,7 +47,6 @@ class ArticleController(
         @VisitorId visitorId: UUID?,
         @LoginUserId(required = false) userId: UUID?,
     ): ArticleCompositionResponse {
-        logger.debug("userId :  {}",userId)
         return articleQueryComposition.getArticle(articleId,visitorId,userId)
     }
 

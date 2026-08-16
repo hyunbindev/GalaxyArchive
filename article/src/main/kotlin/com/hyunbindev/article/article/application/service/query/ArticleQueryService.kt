@@ -9,6 +9,9 @@ import com.hyunbindev.article.article.data.ArticleSummaryPageDto
 import com.hyunbindev.article.article.port.usecase.inbound.ArticleStatsQueryUseCase
 import com.hyunbindev.article.comment.port.inbound.ArticleCommentQueryUseCase
 import com.hyunbindev.article.article.adapter.outbound.ArticleKeywordRepository
+import com.hyunbindev.article.article.application.service.command.create.ArticleViewCountPersistenceService
+import com.hyunbindev.article.article.data.ArticleViewEvent
+import com.hyunbindev.article.article.port.event.outbound.ArticleViewEventPublishPort
 import com.hyunbindev.article.article.port.usecase.outbound.ArticleViewCountPort
 import com.hyunbindev.article.global.exception.ArticleException
 import com.hyunbindev.article.global.exception.constant.ArticleExceptionCode
@@ -23,7 +26,8 @@ internal class ArticleQueryService(
     private val articleRepository: ArticleRepository,
     private val commentQueryUseCase: ArticleCommentQueryUseCase,
     private val articleKeywordRepository: ArticleKeywordRepository,
-    private val articleViewCountPort: ArticleViewCountPort
+    private val articleViewCountPort: ArticleViewCountPort,
+    private val articleViewEventPublishPort: ArticleViewEventPublishPort,
 ) : ArticleQueryUseCase, ArticleStatsQueryUseCase {
 
     private val logger = LoggerFactory.getLogger(javaClass)
@@ -34,9 +38,15 @@ internal class ArticleQueryService(
 
         val keywords = articleKeywordRepository.findAllByArticleOrderBySimilarityDesc(article)
 
-        if (visitorId != null) {
+        if (visitorId != null && article.id != null) {
             runCatching {
-                articleViewCountPort.markIfFirstView(id, visitorId, userId)
+                val marked = articleViewCountPort.markIfFirstView(id, visitorId, userId)
+                val event = ArticleViewEvent(
+                    articleId = article.id,
+                    userId = userId,
+                    visitorId = visitorId,
+                )
+                if(marked) articleViewEventPublishPort.publishViewEvent(event)
             }.onFailure {
                 logger.warn("Failed to record article view", it)
             }
