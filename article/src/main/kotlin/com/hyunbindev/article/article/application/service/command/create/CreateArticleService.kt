@@ -5,6 +5,8 @@ import com.hyunbindev.article.article.data.ArticleDto
 import com.hyunbindev.article.article.domain.ArticleEntity
 import com.hyunbindev.article.article.data.ArticleCreateEvent
 import com.hyunbindev.article.article.adapter.outbound.ArticleRepository
+import com.hyunbindev.article.article.adapter.outbound.ArticleStatRepository
+import com.hyunbindev.article.article.domain.ArticleStatEntity
 import com.hyunbindev.article.article.port.event.outbound.ArticleEventPublishPort
 import com.hyunbindev.article.global.exception.ArticleException
 import com.hyunbindev.article.global.exception.constant.ArticleExceptionCode
@@ -18,15 +20,19 @@ import java.util.UUID
 @Service
 internal class CreateArticleService(
     private val articleRepository: ArticleRepository,
+    private val articleStatRepository: ArticleStatRepository,
     private val articleEventPublishPort: ArticleEventPublishPort,
     private val applicationEventPublisher: ApplicationEventPublisher,
-): CreateArticleUseCase {
+) : CreateArticleUseCase {
     @Transactional
-    override fun createArticle(userId: UUID, req: ArticleDto.CreateRequest):Long{
+    override fun createArticle(userId: UUID, req: ArticleDto.CreateRequest): Long {
         val article: ArticleEntity = articleRepository.save(ArticleEntity.from(userId, req))
 
+        articleStatRepository.save(ArticleStatEntity.from(article))
+
         val articleId = article.id
-            ?:throw ArticleException(ArticleExceptionCode.ARTICLE_INTERNAL_ERROR,"Not persisted Article")
+            ?: throw ArticleException(ArticleExceptionCode.ARTICLE_INTERNAL_ERROR, "Not persisted Article")
+
 
         applicationEventPublisher.publishEvent(ArticleCreateEvent.from(article, req.imageUuids))
 
@@ -34,7 +40,7 @@ internal class CreateArticleService(
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    fun publishArticleCreateEvent(event:ArticleCreateEvent){
+    fun publishArticleCreateEvent(event: ArticleCreateEvent) {
         articleEventPublishPort.publishCreateEvent(event)
     }
 }

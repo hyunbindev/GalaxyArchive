@@ -6,7 +6,7 @@ import com.hyunbindev.article.article.data.ArticleSummaryPageDto
 import java.util.UUID
 
 interface ArticleQueryUseCase {
-    fun getArticle(id:Long): ArticleDto.Response
+    fun getArticle(id:Long, visitorId:UUID?, userId:UUID?): ArticleDto.Response
     fun isArticleExist(id:Long):Boolean
     fun getArticleSummaryPageByCursorAndAuthor(authorId: UUID, cursorArticleId:Long?, size:Int, textLength:Int): ArticleSummaryPageDto
     fun getArticleSummaryByIds(articleIds: List<Long>): List<ArticleSummaryDto>

@@ -8,7 +8,7 @@ import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
-class ArticleCreatedEventKafkaListener(
+internal class ArticleCreatedEventKafkaListener(
     private val articleImageManageUseCase: ArticleImageManageUseCase
 ): ArticleCreatedEventHandler {
     @KafkaListener(

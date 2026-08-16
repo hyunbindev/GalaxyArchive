@@ -2,7 +2,6 @@ plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.plugin.spring'
     id 'io.spring.dependency-management'
-    id 'org.jetbrains.kotlin.plugin.jpa'
 }
 
 tasks.register("prepareKotlinBuildScriptModel"){}
@@ -39,12 +38,6 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.addAll '-Xjsr305=strict'
     }
-}
-
-allOpen {
-    annotation 'jakarta.persistence.Entity'
-    annotation 'jakarta.persistence.MappedSuperclass'
-    annotation 'jakarta.persistence.Embeddable'
 }
 
 tasks.named('test') {

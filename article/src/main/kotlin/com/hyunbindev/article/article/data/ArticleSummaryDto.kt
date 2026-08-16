@@ -19,9 +19,10 @@ data class ArticleSummaryDto(
     val commentsCount:Int=0,
     val keywords:List<String>,
     val thumbnailUrl:String?,
+    val viewCount:Long=0,
 ){
     companion object{
-        fun from(projection: ArticleSummary, commentCount:Int?, keywords:List<String>):ArticleSummaryDto{
+        fun of(projection: ArticleSummary, commentCount:Int?, keywords:List<String>, viewCount:Long):ArticleSummaryDto{
             return ArticleSummaryDto(
                 requireNotNull(projection.id) { "article entity is not persistent" },
                 title = projection.title,
@@ -30,6 +31,7 @@ data class ArticleSummaryDto(
                 commentsCount = commentCount?:0,
                 keywords = keywords,
                 thumbnailUrl = projection.thumbnailUrl,
+                viewCount = viewCount?:0,
             )
         }
     }

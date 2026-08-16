@@ -9,7 +9,7 @@ import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 @Component
-class ClusterCreateKafkaPublisher(
+internal class ClusterCreateKafkaPublisher(
     private val kafkaTemplate: KafkaTemplate<String, UUID>
 ): ClusterCreateEventPublishPort {
     private val logger = LoggerFactory.getLogger(ClusterCreateKafkaPublisher::class.java)

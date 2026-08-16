@@ -2,6 +2,7 @@ package com.hyunbindev.article.article.data
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.hyunbindev.article.article.domain.ArticleEntity
+import java.time.Instant
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -15,7 +16,7 @@ data class ArticleCreateEvent(
         pattern = "yyyy-MM-dd'T'HH:mm:ss",
         timezone = "Asia/Seoul"
     )
-    val occurredAt: LocalDateTime = LocalDateTime.now()
+    val occurredAt: Instant = Instant.now()
 ){
     companion object{
         fun from(article: ArticleEntity, imageUuids:List<UUID>): ArticleCreateEvent{
