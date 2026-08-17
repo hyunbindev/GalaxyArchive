@@ -1,8 +1,7 @@
-package com.hyunbindev.infrastructure.article.event.kafka
+package com.hyunbindev.infrastructure.article.event.kafka.listener
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.hyunbindev.article.embedding.data.EmbeddingCompletedEvent
-
 import com.hyunbindev.article.embedding.port.event.inbound.ArticleEmbeddingCompleteEventHandler
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener

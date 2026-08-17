@@ -1,9 +1,8 @@
-package com.hyunbindev.infrastructure.article.event.kafka
+package com.hyunbindev.infrastructure.article.event.kafka.listener
 
-import com.hyunbindev.article.image.port.inbound.ArticleImageManageUseCase
 import com.hyunbindev.article.article.data.ArticleCreateEvent
 import com.hyunbindev.article.article.port.event.inbound.ArticleCreatedEventHandler
-
+import com.hyunbindev.article.image.port.inbound.ArticleImageManageUseCase
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 

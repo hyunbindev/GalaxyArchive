@@ -12,7 +12,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "article_image")
-class ArticleImageEntity(
+open class ArticleImageEntity(
     @Column(nullable = false)
     var author:UUID,
 
@@ -44,11 +44,13 @@ class ArticleImageEntity(
 
     fun completeUpload(rawKey:String){
         this.rawKey = rawKey
+        this.status = ImageStatus.UPLOADED
     }
 }
 
 enum class ImageStatus(var status: String) {
     PENDING("PENDING"),
+    UPLOADED("UPLOADED"),
     CONVERTING("CONVERTING"),
     CONVERTED("CONVERTED"),
     FAILED("FAILED"),

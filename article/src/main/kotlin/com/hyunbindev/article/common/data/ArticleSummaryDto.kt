@@ -1,14 +1,8 @@
-package com.hyunbindev.article.article.data
+package com.hyunbindev.article.common.data
 
 import com.hyunbindev.article.article.adapter.outbound.ArticleSummary
 import java.time.LocalDateTime
 
-data class ArticleSummaryPageDto(
-    val articles: List<ArticleSummaryDto>,
-    val size:Int,
-    val hasNextPage: Boolean,
-    val cursorArticleId:Long?,
-)
 
 
 data class ArticleSummaryDto(
@@ -22,7 +16,11 @@ data class ArticleSummaryDto(
     val viewCount:Long=0,
 ){
     companion object{
-        fun of(projection: ArticleSummary, commentCount:Int?, keywords:List<String>, viewCount:Long):ArticleSummaryDto{
+        fun of(projection: ArticleSummary,
+               commentCount:Int?,
+               keywords:List<String>,
+               viewCount:Long
+        ):ArticleSummaryDto{
             return ArticleSummaryDto(
                 requireNotNull(projection.id) { "article entity is not persistent" },
                 title = projection.title,

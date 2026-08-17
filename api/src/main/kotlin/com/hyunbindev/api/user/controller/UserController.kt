@@ -1,6 +1,6 @@
 package com.hyunbindev.api.user.controller
 
-import com.hyunbindev.article.article.data.ArticleSummaryPageDto
+import com.hyunbindev.article.common.data.ArticleSummaryPageDto
 import com.hyunbindev.article.article.port.usecase.inbound.ArticleQueryUseCase
 import com.hyunbindev.common.auth.LoginUserId
 import com.hyunbindev.user.port.usecase.inbound.UserQueryUseCase

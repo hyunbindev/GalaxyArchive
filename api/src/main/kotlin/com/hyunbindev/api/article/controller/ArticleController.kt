@@ -40,7 +40,7 @@ class ArticleController(
     fun getArticleGraph(): ArticleGraphDto {
         return articleGraphUseCase.getAllArticleGraph()
     }
-    //TODO-조회수 로직
+
     @GetMapping("/{articleId}")
     fun getArticle(
         @PathVariable articleId: Long,

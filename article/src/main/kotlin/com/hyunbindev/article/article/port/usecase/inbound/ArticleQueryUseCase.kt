@@ -1,8 +1,8 @@
 package com.hyunbindev.article.article.port.usecase.inbound
 
 import com.hyunbindev.article.article.data.ArticleDto
-import com.hyunbindev.article.article.data.ArticleSummaryDto
-import com.hyunbindev.article.article.data.ArticleSummaryPageDto
+import com.hyunbindev.article.common.data.ArticleSummaryDto
+import com.hyunbindev.article.common.data.ArticleSummaryPageDto
 import java.util.UUID
 
 interface ArticleQueryUseCase {

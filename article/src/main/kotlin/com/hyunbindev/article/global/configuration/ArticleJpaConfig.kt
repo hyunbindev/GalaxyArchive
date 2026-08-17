@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
      "com.hyunbindev.article.image.domain",
      "com.hyunbindev.article.comment.domain",
      "com.hyunbindev.article.cluster.domain",
+     "com.hyunbindev.article.trend.domain",
     ])
 @EnableJpaRepositories(basePackages =
     ["com.hyunbindev.article.article.adapter.outbound",
@@ -18,5 +19,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
      "com.hyunbindev.article.image.adapter.outbound",
      "com.hyunbindev.article.comment.adapter.outbound",
      "com.hyunbindev.article.cluster.adapter.outbound",
+     "com.hyunbindev.article.trend.adapter.outbound",
     ])
 class ArticleJpaConfig

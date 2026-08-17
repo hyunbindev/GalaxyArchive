@@ -1,6 +1,5 @@
-package com.hyunbindev.infrastructure.article.event.kafka
+package com.hyunbindev.infrastructure.article.event.kafka.publisher
 
-import com.hyunbindev.article.article.data.ArticleCreateEvent
 import com.hyunbindev.article.embedding.port.event.outbound.ClusterCreateEventPublishPort
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate

@@ -4,12 +4,11 @@ import com.hyunbindev.article.article.port.usecase.inbound.ArticleQueryUseCase
 import com.hyunbindev.article.article.data.ArticleDto
 import com.hyunbindev.article.article.adapter.outbound.ArticleRepository
 import com.hyunbindev.article.article.adapter.outbound.ArticleSummary
-import com.hyunbindev.article.article.data.ArticleSummaryDto
-import com.hyunbindev.article.article.data.ArticleSummaryPageDto
+import com.hyunbindev.article.common.data.ArticleSummaryDto
+import com.hyunbindev.article.common.data.ArticleSummaryPageDto
 import com.hyunbindev.article.article.port.usecase.inbound.ArticleStatsQueryUseCase
 import com.hyunbindev.article.comment.port.inbound.ArticleCommentQueryUseCase
 import com.hyunbindev.article.article.adapter.outbound.ArticleKeywordRepository
-import com.hyunbindev.article.article.application.service.command.create.ArticleViewCountPersistenceService
 import com.hyunbindev.article.article.data.ArticleViewEvent
 import com.hyunbindev.article.article.port.event.outbound.ArticleViewEventPublishPort
 import com.hyunbindev.article.article.port.usecase.outbound.ArticleViewCountPort

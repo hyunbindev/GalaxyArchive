@@ -1,11 +1,6 @@
 package com.hyunbindev.article.cluster.application.service.query
 
-import com.hyunbindev.article.article.adapter.outbound.ArticleKeywordRepository
-import com.hyunbindev.article.article.adapter.outbound.ArticleRepository
-import com.hyunbindev.article.article.data.ArticleDto
-import com.hyunbindev.article.article.data.ArticleKeywordDto
-import com.hyunbindev.article.article.data.ArticleSummaryDto
-import com.hyunbindev.article.article.port.usecase.inbound.ArticleKeywordQueryUseCase
+import com.hyunbindev.article.common.data.ArticleSummaryDto
 import com.hyunbindev.article.article.port.usecase.inbound.ArticleQueryUseCase
 import com.hyunbindev.article.cluster.adapter.outbound.ClusterArticleRepository
 import com.hyunbindev.article.cluster.adapter.outbound.UserClusterRepository
@@ -20,7 +15,6 @@ import com.hyunbindev.article.global.exception.constant.ClusterExceptionCode
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.Queue
 import java.util.UUID
 
 @Service
@@ -31,7 +25,6 @@ internal class ClusterQueryService(
     private val userClusterSnapshotRepository: UserClusterSnapshotRepository,
     private val clusterGraphAssembler: ClusterGraphAssembler,
     private val articleQueryUseCase : ArticleQueryUseCase,
-    private val articleKeywordQueryUseCase: ArticleKeywordQueryUseCase
 ) : ClusterQueryUseCase {
     private val logger = LoggerFactory.getLogger(javaClass)
 
